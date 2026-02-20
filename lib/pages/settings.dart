@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../themes/theme_provider.dart';
+import 'package:music_player/components/my_drawer.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -10,13 +11,19 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text("Settings"),
+        centerTitle: true,
       ),
+      drawer: MyDrawer(),
       body: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: BorderRadius.circular(12),
         ),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.all(25),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // dark mode
             Text('Dark Mode'),

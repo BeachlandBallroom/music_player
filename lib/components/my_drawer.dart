@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player/pages/settings.dart';
+import 'package:music_player/pages/home.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -7,7 +8,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         children: [
           // logo
@@ -27,7 +28,14 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: const Text('Home'),
               leading: const Icon(Icons.home),
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                  ),
+                );
+              },
             ),
           ),
 
