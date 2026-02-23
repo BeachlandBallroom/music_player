@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../themes/theme_provider.dart';
-import 'package:music_player/components/my_drawer.dart';
+import 'package:music_player/features/navigation/app_drawer.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class SettingsPage extends StatelessWidget {
         title: Text("Settings"),
         centerTitle: true,
       ),
-      drawer: MyDrawer(),
+      drawer: AppDrawer(onTap: (int ) {  },),
       body: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,
@@ -28,11 +27,6 @@ class SettingsPage extends StatelessWidget {
             // dark mode
             Text('Dark Mode'),
             // switch
-            CupertinoSwitch(
-              value:
-                Provider.of<ThemeProvider>(context, listen: false).isDarkMode,
-              onChanged: (value) => Provider.of<ThemeProvider>(context, listen: false).toggleTheme(),
-            ),
           ],
         ),
       ),

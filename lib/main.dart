@@ -1,31 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player/pages/home.dart';
-import 'package:music_player/themes/light_mode.dart';
-import 'package:music_player/themes/dark_mode.dart';
-import 'package:music_player/themes/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/services/service_locator.dart';
+import 'core/themes/app_theme.dart';
+import 'core/themes/theme_cubit.dart';
+import 'features/navigation/main_screen.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-      theme: Provider.of<ThemeProvider>(context).themeData,
+    return BlocProvider(
+      create: (_) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightMode,
+            darkTheme: AppTheme.darkMode,
+            themeMode: themeMode,
+            home: const MainScreen(),
+          );
+        },
+      ),
     );
   }
 }
-
